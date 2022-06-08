@@ -5,7 +5,7 @@ import { AppPluginLoader } from 'app/features/plugins/components/AppPluginLoader
 export function CloudIntegrations(): ReactElement | null {
   return (
     <div>
-      <AppPluginLoader id="grafana-easystart-app" basePath="/" />
+      <AppPluginLoader id="grafana-easystart-app" basePath="/data-connections/cloud-integrations" />
     </div>
   );
 }

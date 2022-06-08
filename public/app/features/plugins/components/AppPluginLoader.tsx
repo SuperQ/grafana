@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 
 import { NavModel } from '@grafana/data';
 import { getWarningNav } from 'app/angular/services/nav_model_srv';
@@ -17,8 +18,8 @@ type AppPluginLoaderProps = {
 export const AppPluginLoader = ({ id, basePath }: AppPluginLoaderProps) => {
   const [nav, setNav] = useState<NavModel | null>(null);
   const { value: plugin, error, loading } = useImportAppPlugin(id);
-
-  console.log({ error });
+  const queryParams = useParams();
+  const { pathname } = useLocation();
 
   if (loading) {
     return <div>Plugin is loading...</div>;
@@ -36,7 +37,13 @@ export const AppPluginLoader = ({ id, basePath }: AppPluginLoaderProps) => {
     <Page navModel={nav}>
       <Page.Contents isLoading={loading}>
         {plugin && plugin.root && (
-          <plugin.root meta={plugin.meta} basename={basePath} onNavChanged={setNav} query={{}} path={''} />
+          <plugin.root
+            meta={plugin.meta}
+            basename={basePath}
+            onNavChanged={setNav}
+            query={queryParams}
+            path={pathname}
+          />
         )}
       </Page.Contents>
     </Page>;
@@ -46,7 +53,7 @@ export const AppPluginLoader = ({ id, basePath }: AppPluginLoaderProps) => {
     <Page>
       {loading && <PageLoader />}
       {!loading && plugin && plugin.root && (
-        <plugin.root meta={plugin.meta} basename={basePath} onNavChanged={setNav} query={{}} path={''} />
+        <plugin.root meta={plugin.meta} basename={basePath} onNavChanged={setNav} query={queryParams} path={pathname} />
       )}
     </Page>
   );
