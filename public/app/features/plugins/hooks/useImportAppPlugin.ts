@@ -10,15 +10,15 @@ export const useImportAppPlugin = (id: string) => {
     const pluginMeta = await getPluginSettings(id);
 
     if (!pluginMeta) {
-      throw new Error('Unknown Plugin');
+      throw new Error(`Unknown plugin: "${id}"`);
     }
 
     if (pluginMeta.type !== PluginType.app) {
-      throw new Error('Plugin must be an app');
+      throw new Error(`Plugin must be an app (currently "${pluginMeta.type}")`);
     }
 
     if (!pluginMeta.enabled) {
-      throw new Error('Application Not Enabled');
+      throw new Error(`Application "${id}" is not enabled`);
     }
 
     return await importAppPlugin(pluginMeta);

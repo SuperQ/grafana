@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import { NavModel, AppPlugin } from '@grafana/data';
-
+import { NavModel } from '@grafana/data';
+import { getWarningNav } from 'app/angular/services/nav_model_srv';
 import Page from 'app/core/components/Page/Page';
 import PageLoader from 'app/core/components/PageLoader/PageLoader';
 
@@ -18,12 +18,18 @@ export const AppPluginLoader = ({ id, basePath }: AppPluginLoaderProps) => {
   const [nav, setNav] = useState<NavModel | null>(null);
   const { value: plugin, error, loading } = useImportAppPlugin(id);
 
+  console.log({ error });
+
   if (loading) {
     return <div>Plugin is loading...</div>;
   }
 
   if (error) {
-    return <pre>{JSON.stringify(error, null, 4)}</pre>;
+    return (
+      <Page navModel={getWarningNav(error.message, error.stack)}>
+        <div></div>
+      </Page>
+    );
   }
 
   if (nav) {
