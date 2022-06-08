@@ -118,7 +118,7 @@ var (
 			State:       FeatureStateAlpha,
 		},
 		{
-			Name:        "lokiapi2",
+			Name:        "lokiApi2",
 			Description: "use experimental loki api for websocket streaming (early prototype)",
 			State:       FeatureStateAlpha,
 		},

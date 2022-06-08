@@ -88,7 +88,7 @@ func (s *Service) RunStream(ctx context.Context, req *backend.RunStreamRequest, 
 
 	// Check if the v2alpha endpoint exists
 	wsurl.Path = "/loki/api/v2alpha/tail"
-	if !s.features.IsEnabled(featuremgmt.FlagLokiapi2) || !is400(dsInfo.HTTPClient, wsurl) {
+	if !s.features.IsEnabled(featuremgmt.FlagLokiApi2) || !is400(dsInfo.HTTPClient, wsurl) {
 		isV1 = true
 		wsurl.Path = "/loki/api/v1/tail"
 	}
