@@ -77,14 +77,16 @@ Migration should just be a matter of going from
 
 to
 
-````tsx
+```tsx
 <ClipboardButton
   {/* other props... */}
   onClipboardCopy={(copiedText) => {
     console.log(`Text "${copiedText}" was copied!`);
   }}
 />
-``` Issue [#49847](https://github.com/grafana/grafana/issues/49847)
+``` 
+
+Related Issue [#49847](https://github.com/grafana/grafana/issues/49847)
 
 
 The following RBAC action renames have been carried out:
